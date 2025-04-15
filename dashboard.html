@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güneş Hukuk - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Güneş Hukuk</h1>
+                <button id="toggleSidebar" class="toggle-button">←</button>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="user-info">
+                    <span id="userNameDisplay"></span>
+                </div>
+                <ul>
+                    <li><a href="#" data-section="cases"><span class="icon">📁</span> Dosyalar</a></li>
+                    <li><a href="#" data-section="users"><span class="icon">👥</span> Kullanıcılar</a></li>
+                    <li><a href="#" data-section="company"><span class="icon">🏢</span> Şirket Yönetimi</a></li>
+                    <li><a href="#" data-section="calendar"><span class="icon">📅</span> Takvim</a></li>
+                    <li><a href="#" data-section="reports"><span class="icon">📊</span> Raporlar</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Ana içerik -->
+        <main class="main-content">
+            <header class="top-header">
+                <h2>Yönetim Paneli</h2>
+                <button id="logoutButton" class="logout-button">Çıkış Yap</button>
+            </header>
+            
+            <div class="content">
+                <div id="welcomeSection" class="section active">
+                    <h1>Hoş Geldiniz</h1>
+                    <p>Güneş Hukuk yönetim sistemine hoş geldiniz.</p>
+                </div>
+                
+                <div id="casesSection" class="section">
+                    <h2>Dosyalar</h2>
+                    <div class="cases-list">
+                        <!-- Dosyalar buraya gelecek -->
+                    </div>
+                </div>
+
+                <div id="usersSection" class="section">
+                    <h2>Kullanıcılar</h2>
+                    <div class="users-list">
+                        <!-- Kullanıcılar buraya gelecek -->
+                    </div>
+                </div>
+
+                <div id="companySection" class="section">
+                    <h2>Şirket Yönetimi</h2>
+                    <div class="company-list">
+                        <!-- Şirket bilgileri buraya gelecek -->
+                    </div>
+                </div>
+
+                <div id="calendarSection" class="section">
+                    <h2>Takvim</h2>
+                    <div class="calendar-list">
+                        <!-- Takvim buraya gelecek -->
+                    </div>
+                </div>
+
+                <div id="reportsSection" class="section">
+                    <h2>Raporlar</h2>
+                    <div class="reports-list">
+                        <!-- Raporlar buraya gelecek -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html> 
