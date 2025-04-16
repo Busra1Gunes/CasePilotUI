@@ -826,23 +826,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Payları yükle
     async function loadShares(caseID) {
         try {
-            const response = await fetch(`${API_URL}/CaseFileShare/list/${caseID}`, {
+            console.log('Paylar yükleniyor, Dosya ID:', caseID);
+            const url = `${API_URL}/CaseFileShareList?casFileID=${caseID}`;
+            console.log('İstek URL:', url);
+            
+            const response = await fetch(url, {
+                method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': '*/*'
+                    'accept': '*/*'
                 }
             });
-
-            if (!response.ok) {
-                throw new Error('Paylar yüklenemedi');
-            }
-
-            const result = await response.json();
             
-            if (!result.success) {
-                throw new Error(result.message || 'Paylar yüklenemedi');
+            console.log('API Yanıtı:', response);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-
+            
+            const result = await response.json();
+            console.log('API Veri:', result);
+            
             const sharesList = document.querySelector('.shares-list');
             sharesList.innerHTML = result.data.map(share => `
                 <div class="list-item">
@@ -852,7 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `).join('');
         } catch (error) {
-            console.error('Pay yükleme hatası:', error);
+            console.error('Paylar yüklenirken hata:', error);
             alert('Paylar yüklenirken bir hata oluştu');
         }
     }

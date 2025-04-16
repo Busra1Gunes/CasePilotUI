@@ -712,18 +712,14 @@ async function loadTabContent(tabName, caseId) {
 async function fetchShares(caseId) {
     try {
         console.log('Paylar yükleniyor, Dosya ID:', caseId);
-        const url = `${API_URL}/CaseFileShareList`;
+        const url = `${API_URL}/CaseFileShareList?casFileID=${caseId}`;
         console.log('İstek URL:', url);
         
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
                 'accept': '*/*'
-            },
-            body: JSON.stringify({
-                caseFileID: caseId
-            })
+            }
         });
         
         console.log('API Yanıtı:', response);
@@ -735,11 +731,7 @@ async function fetchShares(caseId) {
         const result = await response.json();
         console.log('API Veri:', result);
         
-        if (!result.data || !result.data.shareDto) {
-            throw new Error('API yanıtında beklenen veri yapısı bulunamadı');
-        }
-        
-        return result.data.shareDto;
+        return result.data || [];
     } catch (error) {
         console.error('Paylar yüklenirken hata:', error);
         throw error;
