@@ -1,0 +1,878 @@
+/* Ana yapı */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+    width: 140px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(1.1);
+}
+
+#toggleSidebar {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+#toggleSidebar:hover {
+    opacity: 1;
+}
+
+.sidebar-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: #34495e;
+}
+
+.sidebar-nav .icon {
+    margin-right: 10px;
+}
+
+/* Ana içerik */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Bölümler */
+.section {
+    display: none;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* Sekmeler */
+.section-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.tab-button:hover {
+    color: #2c3e50;
+}
+
+.tab-button.active {
+    color: #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Butonlar */
+.add-button {
+    background: #3b82f6;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.add-button:active {
+    transform: translateY(0);
+}
+
+#logoutButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#logoutButton:hover {
+    background-color: #c0392b;
+}
+
+/* Kartlar */
+.case-item,
+.share-item,
+.document-item,
+.expense-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.case-info,
+.share-info,
+.document-info,
+.expense-info {
+    flex: 1;
+}
+
+.case-info h3,
+.share-info h3,
+.document-info h3,
+.expense-info h3 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.case-info p,
+.share-info p,
+.document-info p,
+.expense-info p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.case-actions,
+.share-actions,
+.document-actions,
+.expense-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-download {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #da190b;
+}
+
+.btn-download {
+    background-color: #3498db;
+}
+
+.btn-download:hover {
+    background-color: #2980b9;
+}
+
+/* Listeler */
+.cases-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 24px;
+    padding: 20px;
+}
+
+/* Form Container */
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 500px;
+    width: 90%;
+}
+
+.form-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-save {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save:hover {
+    background-color: #45a049;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #da190b;
+}
+
+/* Dosya Detayları */
+.case-details {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.case-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.case-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.btn-back {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-back:hover {
+    background-color: #7f8c8d;
+}
+
+.case-info-detailed {
+    margin-bottom: 30px;
+}
+
+.info-group {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.info-group h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.info-group p {
+    margin: 8px 0;
+    color: #444;
+}
+
+.info-group strong {
+    color: #2c3e50;
+}
+
+.case-actions-detailed {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.action-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.action-button:hover {
+    background-color: #2980b9;
+}
+
+.case-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.shares-section,
+.documents-section,
+.expenses-section,
+.debtors-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.shares-section h3,
+.documents-section h3,
+.expenses-section h3,
+.debtors-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.shares-list-detailed,
+.documents-list-detailed,
+.expenses-list-detailed,
+.debtors-list-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Kullanıcı Listesi */
+.users-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.user-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.user-info h3 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.user-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.user-info strong {
+    color: #2c3e50;
+}
+
+/* Dosya Kartı */
+.case-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.case-card h3 {
+    font-size: 1.25rem;
+    color: #2c3e50;
+    margin-bottom: 16px;
+    font-weight: 600;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+}
+
+.case-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.case-info p {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.case-info strong {
+    color: #64748b;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.case-info span {
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+.case-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.case-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button.btn-edit {
+    background: #22c55e;
+    color: white;
+}
+
+button.btn-edit:hover {
+    background: #16a34a;
+}
+
+button.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+button.btn-delete:hover {
+    background: #dc2626;
+}
+
+/* Tabs and Lists */
+.shares-list,
+.documents-list,
+.expenses-list,
+.debtors-list {
+    display: grid;
+    gap: 16px;
+    padding: 20px;
+}
+
+.shares-item,
+.documents-item,
+.expenses-item,
+.debtors-item {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .cases-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .case-card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .cases-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-buttons {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .tab-button {
+        padding: 8px 16px;
+        font-size: 0.875rem;
+    }
+    
+    .form-container {
+        width: 90%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+    
+    .section-header h2 {
+        text-align: center;
+    }
+    
+    .btn-add,
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+    }
+    
+    .case-actions {
+        flex-direction: column;
+    }
+    
+    .case-info strong {
+        min-width: 100px;
+    }
+}
+
+/* Form Styles */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Button Styles */
+.btn-add {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-add:hover {
+    background: #059669;
+}
+
+.btn-add:active {
+    transform: scale(0.98);
+}
+
+.btn-save {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #2563eb;
+}
+
+.btn-cancel {
+    background: #e2e8f0;
+    color: #64748b;
+}
+
+.btn-cancel:hover {
+    background: #cbd5e1;
+}
+
+/* Tab Styles */
+.tab-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.tab-button {
+    padding: 8px 20px;
+    border: none;
+    background: none;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 1rem;
+    position: relative;
+}
+
+.tab-button.active {
+    color: #3b82f6;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #3b82f6;
+}
+
+/* Case Details Header */
+.case-details-header {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.case-details-header p {
+    margin: 0;
+}
+
+.case-details-header strong {
+    color: #64748b;
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.case-details-header span {
+    color: #1e293b;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.input-group select {
+    flex: 1;
+}
+
+.input-group .btn-add {
+    padding: 8px 16px;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-group .btn-add:hover {
+    background: #059669;
+} 

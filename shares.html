@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paylar - CasePilot</title>
+    <link rel="stylesheet" href="css/shares.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Paylar</h1>
+        
+        <button id="showAddShareForm">Yeni Pay Ekle</button>
+        
+        <form id="addShareForm">
+            <div class="form-group">
+                <label for="caseFileID">Dosya</label>
+                <select id="caseFileID" required>
+                    <option value="">Dosya Seçin</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="userID">Kullanıcı</label>
+                <select id="userID" required>
+                    <option value="">Kullanıcı Seçin</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="shareAmount">Pay Miktarı (%)</label>
+                <input type="number" id="shareAmount" min="0" max="100" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" id="cancelAddShare">İptal</button>
+                <button type="submit">Kaydet</button>
+            </div>
+        </form>
+        
+        <div id="sharesList">
+            <!-- Paylar burada listelenecek -->
+        </div>
+    </div>
+    
+    <script src="js/shares.js"></script>
+</body>
+</html> 

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
-    const API_URL = 'http://localhost:7285';
+    const API_URL = 'http://casepilot.somee.com';
 
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -25,13 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': '*/*',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'POST',
-                    'Access-Control-Allow-Headers': 'Content-Type'
+                    'Accept': '*/*'
                 },
-                mode: 'cors',
-                credentials: 'include',
                 body: JSON.stringify({ userName, password })
             });
 

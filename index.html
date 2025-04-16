@@ -4,28 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Güneş Hukuk - Giriş</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <div class="logo-container">
-                <img src="/images/GuneHukukLogo.png" alt="Güneş Hukuk Logo" class="logo">
+            <div class="login-header">
+                <img src="images/GuneHukukLogo.png" alt="Güneş Hukuk Logo" class="logo">
+                <h1>Güneş Hukuk</h1>
+                <p>Hukuk Yönetim Sistemi</p>
             </div>
-            <form id="loginForm" class="login-form">
+            <form id="loginForm">
                 <div class="form-group">
-                    <label for="userName">Kullanıcı Adı</label>
-                    <input type="text" id="userName" name="userName" required>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Şifre</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Şifre" required>
+                    </div>
                 </div>
-                <div id="errorMessage" class="error-message"></div>
-                <button type="submit" class="login-button">Giriş Yap</button>
+                <div class="form-group">
+                    <button type="submit" class="login-button">
+                        <span>Giriş Yap</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="form-footer">
+                    <a href="#" class="forgot-password">Şifremi Unuttum</a>
+                </div>
             </form>
         </div>
+        <div class="login-footer">
+            <p>&copy; 2024 Güneş Hukuk. Tüm hakları saklıdır.</p>
+        </div>
     </div>
-    <script src="app.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html> 
