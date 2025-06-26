@@ -291,10 +291,13 @@
 
 /* Listeler */
 .cases-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 24px;
-    padding: 20px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: none;
+    gap: 0;
+    min-width: 0;
+    overflow-x: auto;
 }
 
 /* Form Container */
@@ -875,4 +878,68 @@ button.btn-delete:hover {
 
 .input-group .btn-add:hover {
     background: #059669;
+}
+
+/* Data grid (tablo) görünümü için sade ve modern stiller */
+.data-grid {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin: 0;
+    font-size: 15px;
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 24px;
+}
+.data-grid thead th {
+    background: #f5f7fa;
+    color: #222;
+    font-weight: 600;
+    padding: 12px 8px;
+    border-bottom: 2px solid #e0e0e0;
+    text-align: left;
+    font-size: 15px;
+}
+.data-grid tbody tr {
+    transition: background 0.2s;
+    border-bottom: 1px solid #ececec;
+}
+.data-grid tbody tr:hover {
+    background: #f0f4ff;
+}
+.data-grid td {
+    padding: 10px 8px;
+    color: #333;
+    border-bottom: 1px solid #ececec;
+    font-size: 15px;
+}
+.data-grid tr:last-child td {
+    border-bottom: none;
+}
+
+/* Mobilde kart görünümünü kaldır, sadece satırları blok yap */
+@media (max-width: 900px) {
+    .data-grid, .data-grid thead, .data-grid tbody, .data-grid th, .data-grid td, .data-grid tr {
+        display: revert;
+    }
+    .data-grid thead {
+        display: table-header-group;
+    }
+    .data-grid tr {
+        margin-bottom: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background: #fff;
+        padding: 0;
+    }
+    .data-grid td {
+        border: 1px solid #ececec;
+        position: static;
+        padding-left: 8px;
+        min-height: 32px;
+        font-size: 14px;
+    }
+    .data-grid td:before {
+        display: none;
+    }
 } 

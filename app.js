@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
-    const API_URL = 'http://casepilot.somee.com';
+    const API_URL = 'https://socialieve.com';
 
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();

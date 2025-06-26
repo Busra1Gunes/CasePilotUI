@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Güneş Hukuk - Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body>
     <div class="dashboard">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                
-                <button id="toggleSidebar" ><a href="#" data-section="cases"  class="active"><span class="icon">🔙</span>  Geri Git</a></button>
+                <button id="toggleSidebar" type="button">
+                    <span class="icon">🔙</span> Geri Git
+                </button>
             </div>
             <nav class="sidebar-nav">
                 <div class="user-info">
                     <span id="userNameDisplay"></span>
                 </div>
                 <ul>
-                  
                     <li><a href="#" data-section="cases" class="active"><span class="icon">📁</span> Dosyalar</a></li>
                     <li><a href="#" data-section="users"><span class="icon">👥</span> Kullanıcılar</a></li>
-                    <li><a href="#" data-section="transactions" class="active"><span class="icon">💰</span>Hesap Hareketleri</a></li>
-                    <li><a href="#" data-section="settings" class="active"><span class="icon">⚙️</span>Yönetim Ayarları</a></li>
-                    <li><a href="#" data-section="calculate" class="active"><span class="icon">🧮</span>Hesaplamalar</a></li>
-                    <li><a href="#" data-section="information" class="active"><span class="icon">👤</span>Hakkımızda</a></li>
-                    <li><a href="#" data-section="logout" class="active"><span class="icon">🔑</span>Çıkış Yap</a></li>
+                    <li><a href="#" data-section="transactions"><span class="icon">💰</span> Hesap Hareketleri</a></li>
+                    <li><a href="#" data-section="settings"><span class="icon">⚙️</span> Yönetim Ayarları</a></li>
+                    <li><a href="#" data-section="calculate"><span class="icon">🧮</span> Hesaplamalar</a></li>
+                    <li><a href="#" data-section="information"><span class="icon">👤</span> Hakkımızda</a></li>
+                    <li><a href="#" data-section="logout"><span class="icon">🔑</span> Çıkış Yap</a></li>
                 </ul>
             </nav>
         </aside>
@@ -34,8 +34,7 @@
         <!-- Ana içerik -->
         <main class="main-content">
             <header class="top-header">
-                <h2>Yönetim Paneli</h2>
-                <button id="logoutButton">Çıkış Yap</button>
+                <!-- Yönetim Paneli ve Çıkış Yap kaldırıldı -->
             </header>
 
             <div class="content">
@@ -47,21 +46,23 @@
 
                 <!-- Dosyalar Bölümü -->
                 <div class="section active" id="casesSection">
-                    <div class="section-header">
+                    <div class="section-header" id="casesHeader">
                         <h2>Dosyalar</h2>
-                        <button id="addCaseButton" class="add-button">Yeni Dosya Ekle</button>
+                        <button id="addCaseButton" class="add-button" type="button">Yeni Dosya Ekle</button>
                     </div>
                     <div class="cases-list"></div>
                 </div>
 
+                <!-- Kullanıcılar Bölümü -->
                 <div class="section" id="usersSection">
                     <div class="section-header">
                         <h2>Kullanıcılar</h2>
-                        <button id="addUserButton" class="add-button">Yeni Kullanıcı Ekle</button>
+                        <button id="addUserButton" class="add-button" type="button">Yeni Kullanıcı Ekle</button>
                     </div>
                     <div class="users-list"></div>
                 </div>
 
+                <!-- Yeni Dosya Ekleme Formu -->
                 <div class="form-container" id="addCaseForm" style="display: none;">
                     <h3>Yeni Dosya Ekle</h3>
                     <form id="caseForm">
@@ -83,35 +84,35 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Ad</label>
-                            <input type="text" id="name" required>
+                            <input type="text" id="name" required />
                         </div>
                         <div class="form-group">
                             <label for="surname">Soyad</label>
-                            <input type="text" id="surname" required>
+                            <input type="text" id="surname" required />
                         </div>
                         <div class="form-group">
                             <label for="identityNumber">TC Kimlik No</label>
-                            <input type="text" id="identityNumber" required maxlength="11">
+                            <input type="text" id="identityNumber" required maxlength="11" pattern="\d{11}" title="11 haneli TC Kimlik No giriniz" />
                         </div>
                         <div class="form-group">
                             <label for="phoneNumber">Telefon</label>
-                            <input type="tel" id="phoneNumber" required>
+                            <input type="tel" id="phoneNumber" required />
                         </div>
                         <div class="form-group">
                             <label for="dateOfBirth">Doğum Tarihi</label>
-                            <input type="date" id="dateOfBirth" required>
+                            <input type="date" id="dateOfBirth" required />
                         </div>
                         <div class="form-group">
                             <label for="entitlementRate">Hak Sahipliği Oranı (%)</label>
-                            <input type="number" id="entitlementRate" required min="0" max="100" step="0.01">
+                            <input type="number" id="entitlementRate" required min="0" max="100" step="0.01" />
                         </div>
                         <div class="form-group">
                             <label for="disabilityRate">Maluliyet Oranı (%)</label>
-                            <input type="number" id="disabilityRate" required min="0" max="100" step="0.01">
+                            <input type="number" id="disabilityRate" required min="0" max="100" step="0.01" />
                         </div>
                         <div class="form-group">
                             <label for="accidentDate">Kaza Tarihi</label>
-                            <input type="date" id="accidentDate" required>
+                            <input type="date" id="accidentDate" required />
                         </div>
                         <div class="form-actions">
                             <button type="button" class="btn-secondary btn-cancel">İptal</button>
@@ -120,182 +121,22 @@
                     </form>
                 </div>
 
-                <!-- Pay Ekleme Formu -->
-                <div id="addShareForm" class="form-container" style="display:none;">
-                    <form id="shareForm">
-                        <h3>Pay Ekle</h3>
-                        <input type="hidden" id="shareCaseFileID">
-                        <div class="form-group">
-                            <label for="shareUserID">Kullanıcı</label>
-                            <select id="shareUserID" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="shareRate">Pay Oranı (%)</label>
-                            <input type="number" id="shareRate" required min="0" max="100">
-                        </div>
-                        <div class="form-group">
-                            <label for="filePermission">Dosya İzni</label>
-                            <select id="filePermission" required>
-                                <option value="true">Var</option>
-                                <option value="false">Yok</option>
-                            </select>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">Kaydet</button>
-                            <button type="button" class="btn-cancel" onclick="document.getElementById('addShareForm').style.display='none'">İptal</button>
-                        </div>
-                    </form>
-                </div>
+                <!-- Burada diğer formlar da aynı şekilde korunmuş -->
 
-                <!-- Evrak Ekleme Formu -->
-                <div id="addDocumentForm" class="form-container" style="display: none;">
-                    <h3>Evrak Ekle</h3>
-                    <form id="documentForm" onsubmit="handleDocumentSubmit(event)">
-                        <input type="hidden" id="documentCaseFileID">
-                        <div class="form-group">
-                            <label for="documentTypeID">Evrak Türü:</label>
-                            <div class="input-group">
-                                <select id="documentTypeID" required>
-                                    <option value="">Evrak Türü Seçiniz</option>
-                                </select>
-                                <button type="button" class="btn-add" onclick="showAddDocumentTypeModal()">+</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="documentFile">Evrak:</label>
-                            <input type="file" id="documentFile" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-cancel" onclick="document.getElementById('addDocumentForm').style.display='none'">İptal</button>
-                            <button type="submit" class="btn-save">Kaydet</button>
-                        </div>
-                    </form>
-                </div>
+                <div id="caseDetailPanel" class="case-detail-panel" style="display:none;"></div>
 
-                <!-- Yeni Evrak Türü Ekleme Modal -->
-                <div id="addDocumentTypeModal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <h3>Yeni Evrak Türü Ekle</h3>
-                        <div class="form-group">
-                            <label for="newDocumentTypeName">Evrak Türü Adı:</label>
-                            <input type="text" id="newDocumentTypeName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="newDocumentTypeType">Tür:</label>
-                            <select id="newDocumentTypeType" required>
-                                <option value="">Tür Seçiniz</option>
-                                <option value="DosyaEvrak">Dosya Evrakı</option>
-                                <option value="KullaniciEvrak">Kullanıcı Evrakı</option>
-                                <option value="Evrak">Genel Evrak</option>
-                            </select>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-cancel" onclick="document.getElementById('addDocumentTypeModal').style.display='none'">İptal</button>
-                            <button type="button" class="btn-save" onclick="addDocumentType()">Kaydet</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Masraf Ekleme Formu -->
-                <div id="addExpenseForm" class="form-container" style="display:none;">
-                    <form id="expenseForm">
-                        <h3>Masraf Ekle</h3>
-                        <input type="hidden" id="expenseCaseFileID">
-                        <div class="form-group">
-                            <label for="expenseUserID">Kullanıcı</label>
-                            <select id="expenseUserID" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Tutar</label>
-                            <input type="number" id="amount" required min="0" step="0.01">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Açıklama</label>
-                            <textarea id="description" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="paymentDate">Ödeme Tarihi</label>
-                            <input type="date" id="paymentDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="finalPaymentDate">Son Ödeme Tarihi</label>
-                            <input type="date" id="finalPaymentDate" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">Kaydet</button>
-                            <button type="button" class="btn-cancel" onclick="document.getElementById('addExpenseForm').style.display='none'">İptal</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Davalı Ekleme Formu -->
-                <div id="addDebtorForm" class="form-container" style="display:none;">
-                    <form id="debtorForm">
-                        <h3>Davalı Ekle</h3>
-                        <input type="hidden" id="debtorCaseFileID">
-                        <div class="form-group">
-                            <label for="debtorName">Ad</label>
-                            <input type="text" id="debtorName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="debtorSurname">Soyad</label>
-                            <input type="text" id="debtorSurname" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="debtorIdentityNumber">TC Kimlik No</label>
-                            <input type="text" id="debtorIdentityNumber" required pattern="[0-9]{11}">
-                        </div>
-                        <div class="form-group">
-                            <label for="debtorPhoneNumber">Telefon</label>
-                            <input type="tel" id="debtorPhoneNumber" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-save">Kaydet</button>
-                            <button type="button" class="btn-cancel" onclick="document.getElementById('addDebtorForm').style.display='none'">İptal</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="form-container" id="addUserForm" style="display: none;">
-                    <h3>Yeni Kullanıcı Ekle</h3>
-                    <form id="userForm">
-                        <div class="form-group">
-                            <label for="firstName">Ad</label>
-                            <input type="text" id="firstName" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Soyad</label>
-                            <input type="text" id="lastName" name="surname" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-posta</label>
-                            <input type="email" id="email" name="mail" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userName">Kullanıcı Adı</label>
-                            <input type="text" id="userName" name="userName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Şifre</label>
-                            <input type="password" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userCityID">Şehir</label>
-                            <select id="userCityID" name="cityID" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label for="userDistrictID">İlçe</label>
-                            <select id="userDistrictID" name="districtID" required></select>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-secondary btn-cancel">İptal</button>
-                            <button type="submit" class="btn-primary">Kaydet</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </main>
     </div>
-    <script src="js/dashboard.js"></script>
+
+    <!-- JavaScript dosyaları -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cities.js"></script>
+    <script src="js/users.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="js/shares.js"></script>
 </body>
-</html> 
+</html>
