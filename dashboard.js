@@ -127,19 +127,109 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Başvuru türlerini çekip select'e doldur
+    async function populateApplicationTypesSelect(selectElement, caseTypeID, selectedId) {
+        if (!caseTypeID) {
+            selectElement.innerHTML = '<option value="">Önce dava türü seçiniz</option>';
+            return;
+        }
+        try {
+            const response = await fetch(`${API_URL}/ApplicationTypes/GetAll?caseTypeID=${caseTypeID}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': '*/*'
+                }
+            });
+            const result = await response.json();
+            const data = result.data || [];
+            selectElement.innerHTML = '<option value="">Başvuru Türü Seçiniz</option>';
+            data.forEach(type => {
+                selectElement.innerHTML += `<option value="${type.id}" ${selectedId == type.id ? 'selected' : ''}>${escapeHtml(type.name)}</option>`;
+            });
+        } catch (error) {
+            selectElement.innerHTML = '<option value="">Başvuru türleri yüklenemedi</option>';
+        }
+    }
+
+    // Şehirleri çekip select'e doldur
+    async function populateCitiesSelect(selectElement, selectedId) {
+        try {
+            const response = await fetch(`${API_URL}/CitiesDistricts/GetAll`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': '*/*'
+                }
+            });
+            const result = await response.json();
+            const data = result.data || [];
+            selectElement.innerHTML = '<option value="">Şehir Seçiniz</option>';
+            data.forEach(city => {
+                selectElement.innerHTML += `<option value="${city.id}" ${selectedId == city.id ? 'selected' : ''}>${escapeHtml(city.name)}</option>`;
+            });
+        } catch (error) {
+            selectElement.innerHTML = '<option value="">Şehirler yüklenemedi</option>';
+        }
+    }
+
+    // İlçeleri çekip select'e doldur
+    async function populateDistrictsSelect(selectElement, cityID, selectedId) {
+        if (!cityID) {
+            selectElement.innerHTML = '<option value="">Önce şehir seçiniz</option>';
+            return;
+        }
+        try {
+            const response = await fetch(`${API_URL}/CitiesDistricts/Get?CityID=${cityID}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': '*/*'
+                }
+            });
+            const result = await response.json();
+            const data = result.data || [];
+            selectElement.innerHTML = '<option value="">İlçe Seçiniz</option>';
+            data.forEach(district => {
+                selectElement.innerHTML += `<option value="${district.id}" ${selectedId == district.id ? 'selected' : ''}>${escapeHtml(district.name)}</option>`;
+            });
+        } catch (error) {
+            selectElement.innerHTML = '<option value="">İlçeler yüklenemedi</option>';
+        }
+    }
+
     // Dosya ekleme formu göster/gizle
     if (addCaseButton && addCaseForm && caseForm) {
         addCaseButton.addEventListener('click', () => {
             addCaseForm.style.display = 'block';
             caseForm.reset();
             const caseTypeSelect = document.getElementById('caseTypeID');
-            if (caseTypeSelect) populateCaseTypesSelect(caseTypeSelect);
+            const applicationTypeSelect = document.getElementById('applicationTypeID');
+            const citySelect = document.getElementById('cityID');
+            const districtSelect = document.getElementById('districtID');
+            if (caseTypeSelect) {
+                populateCaseTypesSelect(caseTypeSelect);
+                caseTypeSelect.addEventListener('change', function() {
+                    populateApplicationTypesSelect(applicationTypeSelect, this.value);
+                });
+            }
+            if (applicationTypeSelect) {
+                applicationTypeSelect.innerHTML = '<option value="">Önce dava türü seçiniz</option>';
+            }
+            if (citySelect) {
+                populateCitiesSelect(citySelect);
+                citySelect.addEventListener('change', function() {
+                    populateDistrictsSelect(districtSelect, this.value);
+                });
+            }
+            if (districtSelect) {
+                districtSelect.innerHTML = '<option value="">Önce şehir seçiniz</option>';
+            }
         });
         addCaseForm.querySelector('.btn-cancel').addEventListener('click', () => {
             addCaseForm.style.display = 'none';
         });
         caseForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            
             // Formdan verileri al
             const formData = {
                 caseTypeID: parseInt(document.getElementById('caseTypeID').value),
@@ -263,6 +353,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const result = await response.json();
             const data = result.data || result;
+
+            // --- ID eşleştirme ---
+            // 1. Dava Türü
+            let caseTypeID = data.caseTypeID;
+            if (!caseTypeID && data.caseType) {
+                const caseTypesRes = await fetch(`${API_URL}/CaseTypes/GetAll`, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': '*/*' } });
+                const caseTypes = (await caseTypesRes.json()).data || [];
+                const found = caseTypes.find(t => t.name === data.caseType);
+                caseTypeID = found ? found.id : '';
+            }
+            // 2. Başvuru Türü
+            let applicationTypeID = data.applicationTypeID;
+            if ((!applicationTypeID || applicationTypeID === 0) && data.applicationType && caseTypeID) {
+                const appTypesRes = await fetch(`${API_URL}/ApplicationTypes/GetAll?caseTypeID=${caseTypeID}`, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': '*/*' } });
+                const appTypes = (await appTypesRes.json()).data || [];
+                const found = appTypes.find(t => t.name === data.applicationType);
+                applicationTypeID = found ? found.id : '';
+            }
+            // 3. Şehir
+            let cityID = data.cityID;
+            if ((!cityID || cityID === 0) && data.city) {
+                const citiesRes = await fetch(`${API_URL}/CitiesDistricts/GetAll`, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': '*/*' } });
+                const cities = (await citiesRes.json()).data || [];
+                const found = cities.find(c => c.name === data.city);
+                cityID = found ? found.id : '';
+            }
+            // 4. İlçe
+            let districtID = data.districtID;
+            if ((!districtID || districtID === 0) && data.district && cityID) {
+                const districtsRes = await fetch(`${API_URL}/CitiesDistricts/Get?CityID=${cityID}`, { headers: { 'Authorization': `Bearer ${token}`, 'Accept': '*/*' } });
+                const districts = (await districtsRes.json()).data || [];
+                const found = districts.find(d => d.name === data.district);
+                districtID = found ? found.id : '';
+            }
+            // --- /ID eşleştirme ---
+
             detailPanel.innerHTML = `
                 <div class="case-detail-content">
                     <h3>Dosya Güncelle</h3>
@@ -270,9 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="form-group"><label>Ad</label><input type="text" name="name" value="${escapeHtml(data.name)}" required></div>
                         <div class="form-group"><label>Soyad</label><input type="text" name="surname" value="${escapeHtml(data.surname)}" required></div>
                         <div class="form-group"><label>Dava Türü</label><select name="caseTypeID" id="updateCaseTypeID"></select></div>
-                        <div class="form-group"><label>Başvuru Tipi ID</label><input type="number" name="applicationTypeID" value="${data.applicationTypeID || ''}" required></div>
-                        <div class="form-group"><label>Şehir ID</label><input type="number" name="cityID" value="${data.cityID || ''}" required></div>
-                        <div class="form-group"><label>İlçe ID</label><input type="number" name="districtID" value="${data.districtID || ''}" required></div>
+                        <div class="form-group"><label>Başvuru Türü</label><select name="applicationTypeID" id="updateApplicationTypeID" required></select></div>
+                        <div class="form-group"><label>Şehir</label><select name="cityID" id="updateCityID" required></select></div>
+                        <div class="form-group"><label>İlçe</label><select name="districtID" id="updateDistrictID" required></select></div>
                         <div class="form-group"><label>TC</label><input type="text" name="identityNumber" value="${escapeHtml(data.identityNumber)}" required></div>
                         <div class="form-group"><label>Telefon</label><input type="text" name="phoneNumber" value="${escapeHtml(data.phoneNumber)}" required></div>
                         <div class="form-group"><label>Doğum Tarihi</label><input type="date" name="dateOfBirth" value="${data.dateOfBirth ? data.dateOfBirth.substring(0,10) : ''}" required></div>
@@ -280,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="form-group"><label>Engel (%)</label><input type="number" name="disabilityRate" value="${data.disabilityRate}" required></div>
                         <div class="form-group"><label>Kaza Tarihi</label><input type="date" name="accidentDate" value="${data.accidentDate ? data.accidentDate.substring(0,10) : ''}" required></div>
                         <div class="form-group"><label>Açılış Tarihi</label><input type="date" name="openingDate" value="${data.openingDate ? data.openingDate.substring(0,10) : ''}" required></div>
-                        <div class="form-group"><label>Kapanış Tarihi</label><input type="date" name="closingDate" value="${data.closingDate ? data.closingDate.substring(0,10) : ''}"></div>
+                        <div class="form-group"><label>Kapanış Tarihi</label><input type="date" name="closingDate" value="${data.closingDate ? data.closingDate.substring(0,10) : ''}" required></div>
                         <div class="form-group"><label>Durum</label><select name="caseStatus"><option value="0" ${data.caseStatus==0?'selected':''}>Açık</option><option value="1" ${data.caseStatus==1?'selected':''}>Kapalı</option><option value="2" ${data.caseStatus==2?'selected':''}>Beklemede</option></select></div>
                         <div class="form-actions">
                             <button type="submit" class="btn-edit">Kaydet</button>
@@ -291,7 +417,27 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             // Dava türü select'ini doldur
             const updateCaseTypeSelect = document.getElementById('updateCaseTypeID');
-            if (updateCaseTypeSelect) await populateCaseTypesSelect(updateCaseTypeSelect, data.caseTypeID);
+            const updateApplicationTypeSelect = document.getElementById('updateApplicationTypeID');
+            const updateCitySelect = document.getElementById('updateCityID');
+            const updateDistrictSelect = document.getElementById('updateDistrictID');
+            if (updateCaseTypeSelect) {
+                await populateCaseTypesSelect(updateCaseTypeSelect, caseTypeID);
+                updateCaseTypeSelect.addEventListener('change', function() {
+                    populateApplicationTypesSelect(updateApplicationTypeSelect, this.value);
+                });
+            }
+            if (updateApplicationTypeSelect) {
+                await populateApplicationTypesSelect(updateApplicationTypeSelect, caseTypeID, applicationTypeID);
+            }
+            if (updateCitySelect) {
+                await populateCitiesSelect(updateCitySelect, cityID);
+                updateCitySelect.addEventListener('change', function() {
+                    populateDistrictsSelect(updateDistrictSelect, this.value);
+                });
+            }
+            if (updateDistrictSelect) {
+                await populateDistrictsSelect(updateDistrictSelect, cityID, districtID);
+            }
             document.getElementById('updateCaseForm').onsubmit = async function(e) {
                 e.preventDefault();
                 const form = e.target;
